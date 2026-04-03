@@ -1,0 +1,36 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# build outputs
+dist
+build
+.next
+out
+
+# env
+.env
+.env.local
+.env.*.local
+
+# logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# editor
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
