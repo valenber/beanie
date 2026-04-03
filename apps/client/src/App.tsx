@@ -13,7 +13,9 @@ function App() {
   return (
     <main>
       <h1>Beannie</h1>
-      <p>API status: <strong>{apiStatus}</strong></p>
+      <p>
+        API status: <strong>{apiStatus}</strong>
+      </p>
     </main>
   );
 }
