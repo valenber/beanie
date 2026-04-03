@@ -1,4 +1,5 @@
 import { InternalServerErrorException, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { WorkOS } from '@workos-inc/node';
 import type { User as AuthUser } from '@beannie/auth-types';
 
@@ -29,6 +30,8 @@ interface AuthSession {
 export class AuthService {
   private config?: AuthConfig;
   private workos?: WorkOS;
+
+  constructor(private readonly configService: ConfigService) {}
 
   getAuthorizationUrl(): string {
     const config = this.getConfig();
@@ -84,7 +87,7 @@ export class AuthService {
   }
 
   isProduction(): boolean {
-    return process.env.NODE_ENV === 'production';
+    return this.configService.get<string>('NODE_ENV') === 'production';
   }
 
   getSessionCookieName(): string {
@@ -109,23 +112,18 @@ export class AuthService {
       return this.config;
     }
 
-    const apiKey = process.env.WORKOS_API_KEY;
-    const clientId = process.env.WORKOS_CLIENT_ID;
-    const cookiePassword = process.env.WORKOS_COOKIE_PASSWORD;
-
-    if (!apiKey || !clientId || !cookiePassword) {
-      throw new InternalServerErrorException(
-        'Missing WorkOS env vars: WORKOS_API_KEY, WORKOS_CLIENT_ID, WORKOS_COOKIE_PASSWORD',
-      );
-    }
+    const apiKey = this.configService.get<string>('WORKOS_API_KEY')!;
+    const clientId = this.configService.get<string>('WORKOS_CLIENT_ID')!;
+    const cookiePassword = this.configService.get<string>('WORKOS_COOKIE_PASSWORD')!;
+    const redirectUri = this.configService.get<string>('WORKOS_REDIRECT_URI')!;
+    const appUrl = this.configService.get<string>('APP_URL')!;
 
     this.config = {
       apiKey,
       clientId,
       cookiePassword,
-      redirectUri:
-        process.env.WORKOS_REDIRECT_URI ?? 'http://localhost:3001/api/auth/callback',
-      appUrl: process.env.APP_URL ?? 'http://localhost:3000',
+      redirectUri,
+      appUrl,
     };
 
     return this.config;
