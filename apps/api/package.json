@@ -3,22 +3,26 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "nest start --watch",
+    "dev": "node --env-file=../../.env ./node_modules/@nestjs/cli/bin/nest.js start --watch",
     "build": "nest build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/ --max-warnings 0",
-    "start": "node dist/main"
+    "start": "node --env-file=../../.env dist/main"
   },
   "dependencies": {
     "@nestjs/common": "11.1.17",
     "@nestjs/core": "11.1.17",
     "@nestjs/platform-express": "11.1.17",
+    "@workos-inc/node": "8.9.0",
+    "cookie-parser": "1.4.7",
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2"
   },
   "devDependencies": {
+    "@beannie/auth-types": "workspace:0.0.1",
     "@nestjs/cli": "11.0.17",
     "@nestjs/schematics": "11.0.10",
+    "@types/cookie-parser": "1.4.9",
     "@types/express": "5.0.6",
     "@types/node": "22.19.15"
   }

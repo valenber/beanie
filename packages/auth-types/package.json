@@ -1,0 +1,14 @@
+{
+  "name": "@beannie/auth-types",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "files": ["src"],
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts"
+    }
+  },
+  "sideEffects": false
+}
