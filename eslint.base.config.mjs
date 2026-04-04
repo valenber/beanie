@@ -8,5 +8,3 @@ export const baseConfig = tseslint.config(
   { ignores: ['**/dist/**', '**/node_modules/**'] },
   ...tseslint.configs.recommended,
 );
-
-export default baseConfig;

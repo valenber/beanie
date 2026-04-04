@@ -1,0 +1,3 @@
+{
+  "ignoreDependencies": ["rxjs", "@nestjs/schematics"]
+}
